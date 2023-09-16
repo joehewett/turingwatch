@@ -1,0 +1,91 @@
+#!/usr/bin/env perl
+use strict;
+
+use Common qw(verbose);
+use Redacted::Options;
+use Redacted::Turingwatch::AFF;
+use Redacted::EmailBlacklist::Util::DBI qw(eb_read_dbh);
+
+=head1 NAME
+
+monitor-gpt - Converse with email fraudsters using GPT generated responses
+
+=head1 SYNOPSIS
+
+    monitor-gpt --source db
+
+=head1 OPTIONS
+
+    -n, --dry-run   -   Don't make any state changes, only print what
+                        we would have done.
+
+    -s, --source    -   Source of scam emails  monitor, either email from stdin, or db
+
+    -v, --verbose   -   Configure the logging level
+
+=head1 DESCRIPTION
+
+Respond to fraudulent emails using GPT-3
+
+=cut
+
+
+close FILE;
+# Get setup
+GetOptions(
+    'n|dry-run'   => \(my $dry_run = 0),
+    's|source=s'  => \(my $source = 'db'),
+    'i|ebid'    => \(my $eb_id = 0)
+);
+
+while (1) {
+    verbose "Running...";
+    my $raw_email;
+    if ($source eq 'db') {
+        $eb_id = _get_scam_email_id();
+    } elsif ($source eq 'stdin') {
+        foreach my $line ( <STDIN> ) {
+            $raw_email .= $line;
+        }
+        my $file = "raw_email.txt";
+        unless(open FILE, '>'.$file) {
+            die "Could not open $file";
+        }
+
+        print FILE $raw_email;
+    }
+
+    verbose "ebid: $eb_id";
+    # Run the monitor
+    Redacted::Turingwatch::AFF->run(
+        dry_run    => $dry_run,
+        source     => $source,
+        eb_id      => $eb_id,
+        raw_email  => $raw_email
+    );
+    verbose "Sleeping";
+    sleep(60);
+}
+
+sub _get_scam_email_id {
+    my $dbh = eb_read_dbh();
+
+    my $get_id_sth = $dbh->prepare(q{
+        SELECT m.id
+        FROM messages m
+        INNER JOIN raw_bodies r
+        ON m.body_hash = r.body_hash
+        INNER JOIN addresses a
+        ON m.id = a.message_id
+        WHERE m.status='confirmed'
+        AND a.status='confirmed'
+        AND a.context='reply_to'
+        ORDER BY id DESC
+        LIMIT 1
+    });
+    $get_id_sth->execute();
+    my ($eb_id) = $get_id_sth->fetchrow_array;
+
+    return $eb_id;
+
+}

@@ -1,0 +1,209 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "Version 1",
+        "title": "Turingwatch API",
+        "description": "A test API for Turingwatch",
+        "x-logo": {
+            "url": "https://static.redacted.com/images/logo@2x.png",
+            "backgroundColor": "#fafafa"
+        }
+    },
+    "host": "dyn979.dyn.dev.redacted.com",
+    "basePath": "/api/v1",
+    "schemes": [
+        "https"
+    ],
+    "paths": {
+        "/threads": {
+            "get": {
+                "x-mojo-to": "Threads#get_threads_info",
+                "summary": "Retrieve all threads",
+                "description": "Get all the threads",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Threads Found",
+                        "schema": {
+                            "type": "array",
+                            "$ref": "#/definitions/Thread"
+                        }
+                    }
+                }
+            }
+        },
+        "/thread/{id}": {
+            "get": {
+                "x-mojo-to": "Threads#get_thread_info",
+                "summary": "Retrieve information relating to a single thread",
+                "description": "Get the information relating to a thread_id, including sender and receiver address",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                  {
+                    "name": "id",
+                    "in": "path",
+                    "description": "Unique thread_id for this thread",
+                    "required": true,
+                    "type": "string"
+                  }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Thread Info Found",
+                        "schema": {
+                            "$ref": "#/definitions/Thread"
+                        }
+                    }
+                }
+            }
+        },
+        "/thread/{id}/messages": {
+            "get": {
+                "x-mojo-to": "Threads#get_thread_messages",
+                "summary": "Retrieve a thread of emails",
+                "description": "Retrieve an email thread containing all relevant emails given a thread_id",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                  {
+                    "name": "id",
+                    "in": "path",
+                    "description": "Unique thread_id for this thread",
+                    "required": true,
+                    "type": "string"
+                  }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Thread Messages Found",
+                        "schema": {
+                            "type": "array",
+                            "$ref": "#/definitions/Email"
+                        }
+                    }
+                }
+            }
+        },
+        "/thread/{id}/credentials": {
+            "get": {
+                "x-mojo-to": "Threads#get_thread_credentials",
+                "summary": "Retrieve any credentials identified in a thread of emails messages",
+                "description": "Retrieve any crednetials associated with this email thread when provided a thread_id",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                  {
+                    "name": "id",
+                    "in": "path",
+                    "description": "Unique thread_id for this thread",
+                    "required": true,
+                    "type": "string"
+                  }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Thread Messages Found",
+                        "schema": {
+                            "type": "array",
+                            "$ref": "#/definitions/Credential"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Thread": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "The unique identifier of the thread"
+                },
+                "persona_id": {
+                    "type": "string",
+                    "description": "The unique identifier of the persona interacting in this thread"
+                },
+                "persona_first_name": {
+                    "type": "string",
+                    "description": "The first name being used for the persona"
+                },
+                "persona_last_name": {
+                    "type": "string",
+                    "description": "The last name being used by the persona"
+                },
+                "persona_email_address": {
+                    "type": "string",
+                    "description": "The last name being used by the persona"
+                },
+                "scammer_address": {
+                    "type": "string",
+                    "description": "The email address of the scammer in correspondence"
+                },
+                "last_updated": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "The last time the report was updated in UTC"
+                },
+                "created": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "When this thread was initiated"
+                }
+            }
+        },
+        "Email": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "The unique identifier of the thread"
+                },
+                "thread_id": {
+                    "type": "string",
+                    "description": "The thread_id of the thread that this email belongs to"
+                },
+                "subject": {
+                    "type": "string",
+                    "description": "The subject line of the email"
+                },
+                "datetime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "When this email was sent or received"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "Whether this email was sent or received"
+                }
+            }
+        },
+        "Credential": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "The unique identifier of the Credential"
+                },
+                "message_id": {
+                    "type": "string",
+                    "description": "The message_id of the message that this credential belongs to"
+                },
+                "category": {
+                    "type": "string",
+                    "description": "Category of credentials e.g. email address, bank account"
+                },
+                "value": {
+                    "type": "string",
+                    "description": "Credential value"
+                }
+            }
+        }
+    }
+}

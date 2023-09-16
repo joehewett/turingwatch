@@ -1,0 +1,10 @@
+[Unit]
+Description=Correspond with scammers using GPT-3 by checking the database for new emails every 2 minutes
+
+[Timer]
+OnBootSec=1min
+OnUnitActiveSec=2min
+Unit=redacted-turingwatch.service
+
+[Install]
+WantedBy=timers.target

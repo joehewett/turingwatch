@@ -1,0 +1,174 @@
+Received: from OLAP279MB0040.NORP279.PROD.OUTLOOK.COM (2603:10a6:e10:9::16) by
+ OSWP279MB0440.NORP279.PROD.OUTLOOK.COM with HTTPS; Fri, 28 Jan 2022 20:38:57
+ +0000
+Received: from DB6PR0201CA0022.eurprd02.prod.outlook.com (2603:10a6:4:3f::32)
+ by OLAP279MB0040.NORP279.PROD.OUTLOOK.COM (2603:10a6:e10:9::16) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4930.17; Fri, 28 Jan
+ 2022 20:38:56 +0000
+Received: from DB8EUR06FT065.eop-eur06.prod.protection.outlook.com
+ (2603:10a6:4:3f:cafe::36) by DB6PR0201CA0022.outlook.office365.com
+ (2603:10a6:4:3f::32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4930.18 via Frontend
+ Transport; Fri, 28 Jan 2022 20:38:56 +0000
+Authentication-Results: spf=pass (sender IP is 209.85.128.41)
+ smtp.mailfrom=gmail.com; dkim=pass (signature was verified)
+ header.d=gmail.com;dmarc=pass action=none header.from=gmail.com;compauth=pass
+ reason=100
+Received-SPF: Pass (protection.outlook.com: domain of gmail.com designates
+ 209.85.128.41 as permitted sender) receiver=protection.outlook.com;
+ client-ip=209.85.128.41; helo=mail-wm1-f41.google.com;
+Received: from mail-wm1-f41.google.com (209.85.128.41) by
+ DB8EUR06FT065.mail.protection.outlook.com (10.233.253.42) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.4930.15 via Frontend Transport; Fri, 28 Jan 2022 20:38:56 +0000
+X-IncomingTopHeaderMarker:
+ OriginalChecksum:C66CA4892B22DCA09915F0B440DBE0D03D4672FAA118BB0637630CA1A3B26909;UpperCasedChecksum:79B7C4A5F2E55C25A84F16C34856FE095F9E07EBCBEDFE85BA4823EACA88A304;SizeAsReceived:2202;Count:15
+Received: by mail-wm1-f41.google.com with SMTP id bg19-20020a05600c3c9300b0034565e837b6so5211472wmb.1
+        for <joe.hewett@hotmail.co.uk>; Fri, 28 Jan 2022 12:38:56 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:reply-to:from:date:message-id:subject:to;
+        bh=9Mo2moOdY8NOLBBhsTqY1GkxAoBbATCc9SPa2Yjsv6A=;
+        b=qHXZBEoEisiDljKIdwAwvstTfBSorxt1Q0YIQrrRTBsc0L7V2ZChUa1hz9No/Pbch3
+         coErTUSGENEwJRmZN1EDSJj0ezHsNYziEh9kpEMYtiramVsURcsOQEQXDgCFEYOUTE5i
+         WqeF2vKd/PNdVz0QhxLhyIwpNcjzQwncZFBJR54DpjzedDmMbgvZncupJGT/eadMHqdN
+         dmNCWGchGYh7U/PmT2ADbfWq5h1PAlBKDRrb8d+wU9Ont/fV7JDZ6Vqxn8kFDShPYJlh
+         OINdznxE+pl8lZPYlNKhfYZ8+22rJjLD/XqodpK93cUVCPo6rHC/D1Yv/YMGIfKXYLQO
+         lOXA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to;
+        bh=9Mo2moOdY8NOLBBhsTqY1GkxAoBbATCc9SPa2Yjsv6A=;
+        b=kankhNjNlJG71xuvmmcdLXEKlO4N4HEjy72aILAfzt6NYpxWRKzUByhMURy5XtWr9X
+         E5SUKqZEIkU8UBWjs411Jhb9GxiSPbuamIE52Q3mc9kQJgpnomWq+0QUqX04fvOyYv8j
+         XMkmmdSd20KWSNZmPE4xU2bepBXTv3wronDo/mBGMEokmiTONC6Zkj3f54tW96thbFa9
+         gFWCWTotkFQI0GRmDscI/O2iYtH4Y5TmnbXYiEN7xt42cCDtMm8JqJVzaM+sdcfCRbkZ
+         R/Nm73JF+5E0k3klX/BsoBy+/8vTAxRICvhhSHp8qTLCUybG9PPKhvIsR0mvttFscXTd
+         Wm9g==
+X-Gm-Message-State: AOAM531sJjbslpCgHX77vh+fFDcvKWPxiU4Xx4DpqB7PaY18h+au/ub3
+	IPjFMjbUb58jMt0ZkHlubrRtfjhuhp28uKnQGA==
+X-Google-Smtp-Source: ABdhPJwoz+WdAg4kE3uqcwG8+uDMzWgZVJLKsLhLKxqHjXW7P4kvIt+a7EbvDfqguAdxe1GJNzCu54dr9al0jCyDjgE=
+X-Received: by 2002:a7b:c8cf:: with SMTP id f15mr17409751wml.119.1643402335909;
+ Fri, 28 Jan 2022 12:38:55 -0800 (PST)
+Reply-To: anilhaassan@gmail.com
+From: Anila Hassan <anilhaassan@gmail.com>
+Date: Fri, 28 Jan 2022 21:38:16 +0100
+Message-ID: <CAH2-f_H9YTPtqzxY6ns8Pd8wH6-OsNh1mB0r2woGDCGU7+xsyg@mail.gmail.com>
+Subject: Hello,
+To: undisclosed-recipients:;
+Content-Type: multipart/alternative; boundary="000000000000747bba05d6aa6cc3"
+Bcc: joe.hewett@hotmail.co.uk
+X-IncomingHeaderCount: 15
+Return-Path: jawadkhalil95@gmail.com
+X-MS-Exchange-Organization-ExpirationStartTime: 28 Jan 2022 20:38:56.0800
+ (UTC)
+X-MS-Exchange-Organization-ExpirationStartTimeReason: OriginalSubmit
+X-MS-Exchange-Organization-ExpirationInterval: 1:00:00:00.0000000
+X-MS-Exchange-Organization-ExpirationIntervalReason: OriginalSubmit
+X-MS-Exchange-Organization-Network-Message-Id:
+ 27288f38-061b-4081-25e6-08d9e29e345c
+X-EOPAttributedMessage: 0
+X-EOPTenantAttributedMessage: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa:0
+X-MS-Exchange-Organization-MessageDirectionality: Incoming
+X-MS-PublicTrafficType: Email
+X-MS-Exchange-Organization-AuthSource:
+ DB8EUR06FT065.eop-eur06.prod.protection.outlook.com
+X-MS-Exchange-Organization-AuthAs: Anonymous
+X-MS-UserLastLogonTime: 1/28/2022 8:33:23 PM
+X-MS-Office365-Filtering-Correlation-Id: 27288f38-061b-4081-25e6-08d9e29e345c
+X-MS-TrafficTypeDiagnostic: OLAP279MB0040:EE_
+X-MS-Exchange-EOPDirect: true
+X-Sender-IP: 209.85.128.41
+X-SID-PRA: ANILHAASSAN@GMAIL.COM
+X-SID-Result: PASS
+X-MS-Exchange-Organization-PCL: 2
+X-MS-Exchange-Organization-SCL: 5
+X-Microsoft-Antispam: BCL:0;
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Jan 2022 20:38:56.0487
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 27288f38-061b-4081-25e6-08d9e29e345c
+X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-CrossTenant-AuthSource:
+ DB8EUR06FT065.eop-eur06.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: Internet
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg:
+ 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: OLAP279MB0040
+X-MS-Exchange-Transport-EndToEndLatency: 00:00:01.0253389
+X-MS-Exchange-Processed-By-BccFoldering: 15.20.4930.020
+X-Microsoft-Antispam-Mailbox-Delivery:
+	abwl:0;wl:0;pcwl:0;kl:0;iwl:0;dwl:0;dkl:0;rwl:0;ucf:0;jmr:0;ex:0;auth:1;dest:J;OFR:SpamFilterAuthJ;ENG:(5062000285)(90000117)(90005022)(91005020)(91035115)(5061607266)(5061608174)(9050020)(9100338)(4810002)(4910013)(9610025)(9560006)(10180021)(9320005)(9245025);RF:JunkEmail;
+X-Message-Info:
+	qoGN4b5S4yoYIzQ4NwlTBAesL/TJmssMp8vsDKkpiT2C4Cx3ukHzslULUFXM6RUT11p9zZLu1Pookq699geXVu0OowaWQ9Bkj3AAOCCdSGf0i0Y+OWrV+haH75yeiDYzRLvEJPj67s7xB4mf13aDVkrwnkrMV77yIhbCQwVPoSMfwITpM5oPXz/XTQQ+WdaUFuc7wXPd46doXQLeC9XIPA==
+X-Message-Delivery: Vj0xLjE7dXM9MDtsPTA7YT0wO0Q9MjtHRD0yO1NDTD02
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?SmRxd3BJd05vU2hGSXo2MFdQb0QyRUhTUUV3bGp1MlBxWUFSQUdJdURoTldu?=
+ =?utf-8?B?UlNta3krK1N5VHpEem9zWWl0MmJZRThkdFlySG5mZm5KaVNqRDE0bTNwWFFS?=
+ =?utf-8?B?OXlVKzZ4bEllMDI1aGZXSlplRnNCL2lvRXgrV1hHR1B3WW5kNVZmeWt5RHVB?=
+ =?utf-8?B?TWxIc1JXQ3R1T2toMmpXWUxBWGVWaVlYaCtYUlFsTnI5eVpCQWtzd0s0RWhY?=
+ =?utf-8?B?RmNXNkF0ZUNyY1p3SjF2aFp6UlJaN3o5STVNbThiZ0FScERXTEQxT3FuOXl3?=
+ =?utf-8?B?SWRxblgxQW1RdGJjbHV3TmloMkUxSXgrU0xWRG9GSDR5dmxSM0xNMURvc3Bk?=
+ =?utf-8?B?NkI4MVRHbDRYU2VGaWlSaU1PWkhKS0ZVdWFXWVprb0hoVE4zb0pWWHhWMDVR?=
+ =?utf-8?B?YWFwQmkyWG1DRlVKczV2R3FoUUc2eVoxdjd1bU5mMzBuV1lZQ2o5aU90dVla?=
+ =?utf-8?B?UWl5MExBeTV6eEZyM0FNczNTN09acEV4d0RiVDhZVVRiQkVWUnVJalYvTnUy?=
+ =?utf-8?B?QUdjMXg5OGtNM1YyNnhZcVpnTHBTWXBmT0c3UG9Kb3NybWdJMU5odEZCS05j?=
+ =?utf-8?B?NTdYU1MwR0VOcUVYbFlkQUtYYlVZYXpqODdOTTVqNnZpYWhqME41QTZyc0JY?=
+ =?utf-8?B?UDRRRjJaeTRIM3FteWpod1ZtSzBFelhaMVRqekN5RXR3NG5sVk1JQi9pd0Ja?=
+ =?utf-8?B?NFBoV3krOVNIdkh0RHg1di9mRmxBUzl2THE2dDlFWHNXcFBGOHhtaENNRWRl?=
+ =?utf-8?B?TmhTbmN0Ti83bDJ3aU9TcmJoNDVXWnRWTW9JemRweDkyakMrQ2RzSmhpdFJL?=
+ =?utf-8?B?eW5XZ2VQaEc5R3ZheEN2by9xQ2p6NTZPdENRVEtrNDdoQlhZNmJ2cDhBRmJq?=
+ =?utf-8?B?QUpRSzJwQzVBWE9ZMUhRQVkvTTk5R0pEZ0p6T2ZUdnZYZjRXdnVNcTNXYU44?=
+ =?utf-8?B?RDkvSUkvTE8wNnhleVdaeWs3NHM4cVVOTmpMbFVSQnpwWmdLTk1kUXoreURm?=
+ =?utf-8?B?azRuUC9uRzBWWUFXNWFGRWh1ekd5OWV4RVRLSTBCSHBFMzRoTUhDREtOVmc2?=
+ =?utf-8?B?bFpTcHJuOVV4V0UwbEd4WVJBd3RDMTFoZThDbGU0RWxpRWtlTzFYN0NXWGQ5?=
+ =?utf-8?B?VnFHdFM2NStxRWJ0QnVUc0VZcTM3VEJ6Zk5ZN1E5YlMxZVNObDFVNGs0aFFX?=
+ =?utf-8?B?ek56NHpqRzhmd1YyM0tXaFJHaFcvOXRFUzN3Y054clBMM2FFdnhLd0xMNEph?=
+ =?utf-8?B?ZmdDSDlKOWQyajY4aVRkdU9oY0dKNUpHUmtLaHRscDVlN1JkMWV5aVk0aWFl?=
+ =?utf-8?B?VnVJWkIyR0xnOXN0SnpVWmRyZDRYMVU2UXUreTdOS3FwQ1puYTJQWHIxMmZH?=
+ =?utf-8?B?TnhsSnA0VnhKN1pWOG40cjlvZzhObDlmWW50V0pmZUFiNkdQajBnSkZYY0pW?=
+ =?utf-8?B?clF4Q3V5Q0pEaXVWUXJsUEduckhoQkxKaCtTamVVYi9pQk96S05ZQURXczBT?=
+ =?utf-8?B?VTdjS0t4QXMwV2wzUjA3MXR0UHRnd1pOb2Z4SWFENTE3bWVzV2hQY3NzRWhv?=
+ =?utf-8?B?dnlMMzAzWGVNZVdIZ2hoMnBYRmgxZGx0cDR2Rnp4TnhGZmIwQ2UyM0hYcHJ3?=
+ =?utf-8?B?Yi9QdFVCNGxCNHpFTWVackRmUnNNY2dqdmlHbWxDOEIrMGNPeG9FUWR4THdD?=
+ =?utf-8?B?YXZ6S2VxaU54bi9KT2tvdEJZciszQ05BUTZGUnlDZnhrVElzN2VWbWMrRWFq?=
+ =?utf-8?B?M2ZkSjNzWDBYS0VrL05LOVNFL1V1T3pCaVc5L21jSHlKcXZGMmsrNnV3c0c3?=
+ =?utf-8?B?aFFIOVkvVlI1Y0hnZUc0aEFlYXJ5L1R5ZU80ZlJUUHFxZWZFK2tOV3oxRCtX?=
+ =?utf-8?B?S0hZeFB1L0NVeEd6MDRkOHVsb0hQVkhZS3ZSd0tkMDVTNVVXcDFjUG9OR3RL?=
+ =?utf-8?B?Y0xjL1duYlQ3cG1DUGRmMzcxZ0lXY1BMRm52VjVHUUxHRFlvQVhncnY3MUND?=
+ =?utf-8?B?RTR4d05YMkhuT0ozQ29GOTFORHV5eFMxRkM0SHNUNlkrZ0JqZWl3SDZUdXpO?=
+ =?utf-8?B?Slo1TmFkcEthM3ZtbmF5djFobVplaEhtUVVOUGplRlQ3R0lYcVB1Nm1SUVU1?=
+ =?utf-8?B?QlJ3REU0Zi82ZXcrb24vUFljMDY1VTdQZTZYMGJpOUFLanRwRzB1WmYySno2?=
+ =?utf-8?B?QmQ4VmRUb081V3g0dGdES0RoQWVBdlpOTGVLWFNJWFNJdUdVV2Z5VFg4cnB1?=
+ =?utf-8?B?K3NQRGZuUldKZ0tXakxlQ2pFNXJXY3VDR25JWmhQTDJJSFZ6Z1paU1NjVmpT?=
+ =?utf-8?B?SUVVakFVUWhOelg2QjlBbWFQRmxLR0ZoR2hVWFMwMHJwWWJwckVheldhWklp?=
+ =?utf-8?B?NkFGN0JlazVYZitxdTdKK2dicVB6YmRYaHRuWDFBZzQ4aGdyc1hhdDEyUUdn?=
+ =?utf-8?Q?4qs6+HFQdIPZFVUctgl61pUaEeqQPrVa/vM=3D?=
+MIME-Version: 1.0
+
+--000000000000747bba05d6aa6cc3
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+--=20
+Hello,
+
+How are you, hope everything is ok with you, I=E2=80=99m Anila Hassan, do y=
+ou have
+little time
+to discuss with me? I need your urgent reply, thanks.
+
+--000000000000747bba05d6aa6cc3
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8"><d=
+iv dir=3D"ltr"><br clear=3D"all"><br>-- <br><div dir=3D"ltr" class=3D"gmail=
+_signature" data-smartmail=3D"gmail_signature"><div dir=3D"ltr">Hello,<br><=
+br>How are you, hope everything is ok with you, I=E2=80=99m Anila Hassan, d=
+o you have little time<br>to discuss with me? I need your urgent reply, tha=
+nks.<br></div></div></div>
+
+--000000000000747bba05d6aa6cc3--

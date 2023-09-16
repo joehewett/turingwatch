@@ -1,0 +1,11 @@
+[Unit]
+Description=Correspond with scammers using GPT-3
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/bin/turingwatch-monitor
+User=
+
+[Install]
+WantedBy=multi-user.target

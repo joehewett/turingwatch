@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Incident Response API</title>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <link
+            rel="shortcut icon"
+            href="https://static.redacted.com/images/favicon.ico">
+    </head>
+    <body>
+        <script>
+            const addCustomElements = function() {
+                const info = document.getElementsByClassName('api-info')[0];
+
+                <% if ($deprecated) { %>
+                    const banner = document.createElement('div');
+                    banner.classList.add('banner', 'danger');
+                    banner.innerHTML =
+                        'Please note this version of the API is deprecated. We strongly '
+                            + 'recommend that you use the <a href="/api">latest version</a>.';
+                    info.insertBefore(banner, info.firstChild);
+                <% } %>
+            };
+        </script>
+        <div id="redoc-body"></div>
+        <script src="https://cdn.jsdelivr.net/npm/redoc@2.0.0-rc.54/bundles/redoc.standalone.js"
+            integrity="sha384-pxWFJkxrlfignEDb+sJ8XrdnJQ+V2bsiRqgPnfmOk1i3KKSubbydbolVZJeKisNY"
+            crossorigin="anonymous"></script>
+        <script>
+            Redoc.init('/api/<%= $version %>/<%= $mode %>.json', {
+                hideDownloadButton: true,
+                sortPropsAlphabetically: true,
+            }, document.getElementById('redoc-body'), addCustomElements);
+        </script>
+    </body>
+</html>
